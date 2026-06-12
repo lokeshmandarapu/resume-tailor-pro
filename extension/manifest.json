@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Resume Tailor Pro",
+  "version": "1.0.0",
+  "description": "Detect a job on the page, score your resume against it, and tailor + download a PDF/Word resume — all in the side panel.",
+  "permissions": ["sidePanel", "storage", "activeTab", "scripting"],
+  "host_permissions": [
+    "http://127.0.0.1:8000/*",
+    "https://*.linkedin.com/*",
+    "https://*.greenhouse.io/*",
+    "https://*.lever.co/*",
+    "https://*.myworkdayjobs.com/*",
+    "https://*.indeed.com/*",
+    "https://*.ashbyhq.com/*",
+    "https://*/*"
+  ],
+  "background": { "service_worker": "background.js" },
+  "action": { "default_title": "Open Resume Tailor Pro" },
+  "side_panel": { "default_path": "sidepanel.html" },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "icons": { "16": "icons/icon16.png", "48": "icons/icon48.png", "128": "icons/icon128.png" }
+}

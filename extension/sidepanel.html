@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="sidepanel.css" />
+</head>
+<body>
+  <header>
+    <h1>Resume Tailor Pro</h1>
+    <span id="backend-dot" class="dot dot-bad" title="Backend status"></span>
+  </header>
+
+  <div id="backend-warn" class="warn hidden">
+    Backend not reachable at <code>127.0.0.1:8000</code>. Double-click
+    <code>backend/launch.command</code> to start it, then click Retry.
+    <button id="retry" class="btn-mini">Retry</button>
+  </div>
+
+  <!-- RESUME -->
+  <section class="card">
+    <div class="card-head">
+      <h2>Your resume</h2>
+      <span id="resume-status" class="muted">none stored</span>
+    </div>
+    <input type="file" id="resume-file" accept=".pdf,.docx" hidden />
+    <button id="upload-btn" class="btn">Upload / update resume</button>
+    <div id="resume-summary" class="muted small hidden"></div>
+  </section>
+
+  <!-- JD -->
+  <section class="card">
+    <div class="card-head">
+      <h2>Job description</h2>
+      <span id="jd-source" class="muted"></span>
+    </div>
+    <button id="detect-btn" class="btn">Detect job on this page</button>
+    <textarea id="jd-text" rows="5" placeholder="Detected JD appears here — or paste / select text on the page."></textarea>
+  </section>
+
+  <!-- ACTIONS -->
+  <div class="actions">
+    <button id="score-btn" class="btn btn-primary" disabled>Score</button>
+    <button id="tailor-btn" class="btn btn-accent" disabled>Tailor resume</button>
+  </div>
+
+  <div id="loading" class="loading hidden"><span class="spinner"></span> <span id="loading-msg">Working…</span></div>
+
+  <!-- SCORE -->
+  <section id="score-card" class="card hidden">
+    <div class="score-top">
+      <div class="score-num"><span id="score-total">–</span><small>/100</small></div>
+      <div id="score-delta" class="delta"></div>
+    </div>
+    <div class="bar-label">JD-Alignment &amp; Parse-Readiness</div>
+    <div id="subscores"></div>
+
+    <div class="kw-block">
+      <div class="kw-title good">Matched JD keywords</div>
+      <div id="kw-matched" class="chips"></div>
+    </div>
+    <div class="kw-block">
+      <div class="kw-title bad">Missing — required</div>
+      <div id="kw-missing-req" class="chips"></div>
+    </div>
+    <div class="kw-block">
+      <div class="kw-title" style="color:#7bd0ff">Covered via related experience</div>
+      <div id="kw-adjacent" class="chips"></div>
+    </div>
+    <div class="kw-block">
+      <div class="kw-title warn-t">Missing — nice-to-have</div>
+      <div id="kw-missing-pref" class="chips"></div>
+    </div>
+
+    <div id="notes" class="notes"></div>
+    <div id="changelog" class="changelog hidden"></div>
+
+    <div id="download-row" class="actions hidden">
+      <button id="dl-pdf" class="btn">Download PDF</button>
+      <button id="dl-docx" class="btn">Download Word</button>
+    </div>
+    <div class="disclaimer">
+      A pre-submission diagnostic — not a real-ATS verdict. Clean parsing + truthful, quantified,
+      JD-aligned content is what earns callbacks. Nothing here is fabricated.
+    </div>
+  </section>
+
+  <script src="sidepanel.js"></script>
+</body>
+</html>
